@@ -9,9 +9,9 @@ load_dotenv()
 SECRET_KEY = os.getenv("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'main',
@@ -38,8 +38,8 @@ MIDDLEWARE = [
 ROOT_URLCONF = 'car_rental.urls'
 
 #deployment checks
-SECURE_SSL_REDIRECT = True
-CSRF_COOKIE_SECURE = True
+#SECURE_SSL_REDIRECT = True
+#CSRF_COOKIE_SECURE = True
 #-------------
 
 TEMPLATES = [
@@ -85,6 +85,7 @@ STATIC_ROOT = BASE_DIR / 'production/'
 STATICFILES_DIRS = [
     BASE_DIR / 'static/',
 ]
+
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 MEDIA_URL = 'media/'
