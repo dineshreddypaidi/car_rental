@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    {% comment %} seo {% endcomment %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Rent cars and bikes effortlessly in Kamareddy, Telangana. Enjoy seamless booking, competitive prices, and a user-friendly interface with exceptional service tailored for your travel needs.">
+    <meta name="keywords" content="car rentals Kamareddy, bike rentals Telangana, affordable vehicle hire, car hire Kamareddy, bike hire Kamareddy, vehicle rental services Telangana">
+    <meta name="keywords" content="car rentals, bike rentals, Kamareddy, Telangana, affordable rentals, car hire, bike hire, vehicle rental services">
+    <meta name="keywords" content="self driving, rental, low prices">
+
+    <link rel="canonical" href="https://www.kmrwheels.in/car-rental/kamareddy-telangana/">
+    
+    <link rel="preconnect" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="preconnect" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    
+    {% comment %} imp {% endcomment %}
+    <link rel="icon" href= {% static "img/icon-top.png" %}>
+    <title>
+        {% block title %}
+        {% endblock title %}
+    </title>
+    <link rel="stylesheet" href= {% static "css/style.css" %}>
+    
+    {% block custom_style %}
+    {% endblock custom_style %}
+
+    <!--bootstrap-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    {% comment %} my scripts {% endcomment %}
+    <script src={% static "js/nav-toggle.js" %}></script>
+    <script src={% static "js/nav-active.js" %}></script>
+    {% block custom_script %}
+    {% endblock custom_script %}
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-VWDYFLNVBH"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-VWDYFLNVBH');
+    </script>
+</head>
+<body>
+    {% block promotion %}
+    {% endblock promotion %}
+    <!-- Navbar -->
+    <nav class="navbar sticky-top navbar-expand-lg blur">
+        <div class="container">
+            <a class="navbar-brand" href="/">
+                <img src={% static "img/icon.png" %} alt="Kmr wheels">
+            </a>
+            <button class="navbar-toggler border-0 nav-list-button" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <div class="nav-list-container" onclick="myFunction(this)">
+                    <div class="bar1"></div>
+                    <div class="bar2"></div>
+                    <div class="bar3"></div>
+                </div>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 customnavbar">
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/vechiles/cars/">Cars</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/vechiles/bikes/">Bikes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/about/">About Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/contact/">Contact Us</a>
+                    </li>
+                </ul>
+                <br>
+                {% block user_logged %}
+                
+                {% endblock user_logged %}
+                <br>
+            </div>
+        </div>
+    </nav>
+    <br>
+    {% block vechile_filter %}
+    {% endblock vechile_filter%}
+
+    {% block user_login_register %}
+    {% endblock user_login_register %}
+
+    {% block user_content %}
+    {% endblock user_content %}
+
+    {% block home_img_carousel %}
+    {% endblock home_img_carousel %}
+    
+    {% block cars %}
+    {% endblock cars %}
+
+    {% block vechile %}
+    {% endblock vechile %}
+
+    {% block bikes %}
+    {% endblock bikes %}
+
+    {% comment %} footer {% endcomment %}
+    <footer class="bg-dark text-white py-4">
+        <div class="container">
+            <div class="row">
+                <!-- About Us -->
+                <div class="col-md-4">
+                    <u class="center" style="color: orange;"><h4 style="color: #fff;">Kmr Wheels</h4></u>
+                    <p>Your trusted vehicle rental service offering a variety of cars and bikes to meet your travel needs.</p>
+                </div>
+                <!-- Quick Links -->
+                <div class="col-md-4">
+                    <u class="center" style="color: orange;"><h4 style="color: #fff;">Quick Links</h4></u>
+                    <ul class="list-unstyled">
+                        <li><a href="#cars" class="text-white">Cars</a></li>
+                        <li><a href="#bikes" class="text-white">Bikes</a></li>
+                    </ul>
+                </div>
+                <!-- Contact Us -->
+                <div class="col-md-4">
+                    <u class="center" style="color: orange;"><h4 style="color: #fff;">Contact Us</h4></u>
+                    <a href="mailto:#" class="text-light">
+                        <p>Email: info@kmrwheels.in</p>
+                    </a>
+                    <a href="tel:918465006180" class="text-light">
+                        <p>Phone: +91 8465 00 6180</p>
+                    </a>
+                    <div class="social-icons m-2">
+                        <a href="#" class="text-white me-2"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-white me-2"><i class="fab fa-twitter"></i></a>
+                        <a href="https://instagram.com/kmrwheels.in" class="me-2 text-white"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="text-center mt-3 text-info">
+                <p class="mb-0">&copy; 2024 KMRWheels. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>

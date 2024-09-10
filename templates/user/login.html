@@ -1,0 +1,50 @@
+{% extends "base/base.html" %}
+{% load static %}
+    {% block title %}
+        Kmr Wheels - login
+    {% endblock title %}
+       
+    {% block custom_style %}
+        <link rel="stylesheet" href={% static "css/user/login.css" %}>
+    {% endblock custom_style %}
+
+    {% block user_login_register %}
+        <div class="container-center">
+            <div class="auth-container">
+                <div class="nav-bar-user">
+                    <div id="loginBtn" class="nav-user-link active">
+                        <a href="/user/login">Login</a>
+                    </div>
+                    <div id="signupBtn" class="nav-user-link">
+                        <a href="/user/register">Register</a>
+                    </div>
+                </div>
+                <div id="loginForm" class="form-container">
+                    <form method="POST" action="{% url 'login' %}">
+                        {% csrf_token %}
+                        {% if messages %}
+                            <ul>
+                                {% for message in messages %}
+                                        <div class="alert alert-danger alert-dismissible fade show w-100 mx-auto">
+                                            <button type="button" class="btn-close btn-sm" data-bs-dismiss="alert"></button>
+                                            <strong>{{ message }}</strong>
+                                        </div>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+                        <div class="form-floating mb-3 mt-3 ">
+                            <input type="text" class="form-control" id="email" placeholder="Enter email" name="username" required>
+                            <label for="email" class="input-field-user">Email address, username or Phone number</label>
+                        </div>
+                        <div class="form-floating mb-3 mt-3 ">
+                            <input type="password" class="form-control" id="password" placeholder="Enter password" name="password" required>
+                            <label for="email" class="input-field-user">password</label>
+                        </div>
+                        <div class="form-floating mb-3 mt-3 user-btn">
+                            <input type="submit" class="btn text-white" value="Login">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    {% endblock user_login_register %}

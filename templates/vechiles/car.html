@@ -1,0 +1,151 @@
+{% extends "base/base.html" %}
+{% load static %}
+    {% block title %}
+        #{{vechile.plate_number}} |Kmr Wheels
+    {% endblock title %}
+    
+    {% block custom_style %} 
+        <link rel="stylesheet" href={% static "css/vechiles/detail_view.css" %}>
+    {% endblock custom_style %}
+
+    {% block user_logged %}
+        {% if user.is_authenticated %}
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" href="/user/rentals">My Rentals</a>
+                </li>
+                <br>
+                <li class="nav-item dropdown custom-dropdown-toggle">
+                    <a class="nav-link dropdown-toggle text-light" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        My Account
+                    </a>
+                    <ul class="dropdown-menu custom-dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="/user">Profile</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="/user/logout">Logout</a></li>
+                    </ul>
+                </li>
+            </ul>
+        {% else %}
+                <div class="profile-badge">
+                    <a href="/user/login" class="btn">Login</a>
+                </div>
+                <div class="profile-badge">
+                    <a href="/user/register" class="btn">Sign Up</a>
+                </div>
+        {% endif %}
+    {% endblock user_logged %}
+
+    {% block vechile %}
+    <div class="container mt-2 view-container">
+        <div class="row">
+            <!-- Car Image and Basic Info -->
+
+            <div class="col-md-6">
+                <div id="slideshow" class="carousel slide" data-bs-ride="carousel">
+                    <!-- The slideshow/carousel -->
+                    <div class="carousel-inner fixed-img-size position-relative">
+                        {% for image in images %}
+                            <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                                <img src='{{ image.image }}' class="d-block vechile-image" alt="{{ vechile.brand }} {{ vechile.model }}">
+                            </div>
+                        {% endfor %}
+                        <span class="badge available-status position-absolute top-0 start-0 m-2 {{ vechile.availability_status }}">{{ vechile.availability_status }}</span>
+                    </div>
+        
+                    <!-- Left and right controls/icons -->
+                    <button class="carousel-control-prev" type="button" data-bs-target="#slideshow" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon"></span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#slideshow" data-bs-slide="next">
+                        <span class="carousel-control-next-icon"></span>
+                    </button>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <u><h2 class="mt-4 vechile-name">{{ vechile.year }} {{ vechile.brand }} {{ vechile.model }}</h2></u>
+                <p><strong>Model:</strong> {{ vechile.model}}</p>
+                <p><strong>Year:</strong>  {{ vechile.year }}</p>
+                <p><strong>Seats:</strong> {{ vechile.seats }}</p>
+                <p><strong>Mileage:</strong> {{vechile.mileage}} kmpl</p>
+                <p><strong>Fuel Type:</strong> {{vechile.fuel_type}}</p>
+                <p><strong>Transmission Type:</strong> {{vechile.transmission_type}}</p>
+                <p>{{vechile.description}}</p>
+                <div class="rating mt-3">
+                    <span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9734;</span>
+                    <small>(4.0 / 5.0)</small>
+                </div>
+                <br>
+                <div class="row mt-auto">
+                    <div class="col-6">
+                        <p class="rent-text mb-0"><strong>Rs. {{ vechile.rental_rate_per_hour }}</strong> /hr</p>
+                    </div>
+                    <div class="col-6 text-end">
+                        <p class="rent-text mb-0"><strong>Rs. {{ vechile.rental_rate_per_day }}</strong> /day</p>
+                    </div>
+                </div>
+                {% if vechile.availability_status == 'Available' %}
+                    <a href="/book/car/{{ vechile.vechile_id }}" class="btn btn-primary mt-3 w-100 btn-md">Book Now</a>
+                {% else %}
+                        {% if is_booked %}
+                            <button class="btn btn-success mt-3 w-100 btn-md" disabled> Confirmed </button>
+                        {% else %}    
+                            <button class="btn btn-primary mt-3 w-100 btn-md" disabled>Not available</button>
+                        {% endif %}
+                {% endif %}
+            </div>
+        </div>
+{% comment %} 
+        <div class="row mt-4">
+            <!-- Rent Details -->
+            <div class="col-12">
+                <h3>Rent Details</h3>
+                <div class="card">
+                    <div class="card-body">
+                        <p><strong>Rental per hour:</strong> {{ vechile.rental_rate_per_hour }}</p>
+                        <p><strong>Rental per day:</strong> {{ vechile.rental_rate_per_day }}</p>
+                        <p><strong>Insurance:</strong> Included</p>
+                    </div>
+                </div>
+            </div>
+        </div> {% endcomment %}
+        {% comment %} <div class="row mt-4">
+            <div class="col-12">
+                <h3>Vechile Features</h3>
+                <div class="card">
+                    <div class="card-body">
+                        <p><strong>A/C: </strong> yes </p>
+                        <p><strong>GPS: </strong> yes </p>
+                        <p><strong>bluetooth: </strong></p>
+                    </div>
+                </div>
+            </div>
+        </div> {% endcomment %}
+
+        <!-- Reviews Section -->
+        <div class="row mt-4">  
+            <div class="col-12">
+                <h3>Customer Reviews</h3>
+                <div class="review-card card">
+                    <div class="card-body">
+                        <h5 class="card-title">John Doe</h5>
+                        <div class="rating">
+                            <span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9734;</span>
+                        </div>
+                        <p class="card-text">Great vechile! Smooth ride and very comfortable. Will rent again.</p>
+                    </div>
+                </div>
+                <div class="review-card card">
+                    <div class="card-body">
+                        <h5 class="card-title">Jane Smith</h5>
+                        <div class="rating">
+                            <span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span>
+                        </div>
+                        <p class="card-text">Fantastic experience! The vechile was in excellent condition and the service was top-notch.</p>
+                    </div>
+                </div>
+                <!-- Add more reviews as needed -->
+            </div>
+        </div>
+    </div>
+    {% endblock vechile %}

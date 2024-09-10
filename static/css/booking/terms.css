@@ -1,0 +1,32 @@
+body {
+    font-family: 'Times New Roman', Times, serif;
+    line-height: 1.6;
+    padding: 20px;
+    background-color: #f4f4f4;
+}
+.title {
+    color: red;
+    text-align: center;
+    text-shadow: 1px 1px 1px #333;
+    font-size: 2rem;
+}
+h1 {
+    color: #333;
+    text-align: center;
+}
+h2 {
+    color: #000;
+}
+h4 {
+    color:darkblue;
+}
+p {
+    margin-bottom: 10px;
+}
+ol {
+    margin: 15px 0;
+    padding-left: 20px;
+}
+li {
+    margin-bottom: 10px;
+}

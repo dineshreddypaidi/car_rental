@@ -1,0 +1,57 @@
+{% extends "base/base.html" %}
+{% load static %}
+
+{% block title %}
+    about | Kmr Wheels
+{% endblock title %}
+
+{% block custom_style %}
+    <link rel="stylesheet" href={% static "css/about/about.css" %}>
+{% endblock custom_style %}
+
+{% block user_logged %}
+{% if user.is_authenticated %}
+    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+            <a class="nav-link" href="/user/rentals/">My Rentals</a>
+        </li>
+        <br>
+        <li class="nav-item dropdown custom-dropdown-toggle">
+            <a class="nav-link dropdown-toggle text-light" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                My Account
+            </a>
+            <ul class="dropdown-menu custom-dropdown-menu" aria-labelledby="navbarDropdown">
+                <li><a class="dropdown-item" href="/user">Profile</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="/user/logout">Logout</a></li>
+            </ul>
+        </li>
+    </ul>
+{% else %}
+        <div class="profile-badge">
+            <a href="/user/login" class="btn">Login</a>
+        </div>
+        <div class="profile-badge">
+            <a href="/user/register" class="btn">Sign Up</a>
+        </div>
+{% endif %}
+{% endblock user_logged %}
+
+{% block user_content %}
+<div class="about-container m-4 mb-5">
+    <section class="about-us text-center">
+        <div class="container">
+            <h2>About Us</h2><hr>
+            <p>Welcome to <strong>kmrwheels.in</strong>, your trusted partner in reliable and affordable vehicle rentals. Whether you're planning a weekend getaway, a business trip, or simply need a vehicle for daily use, we are here to meet all your transportation needs.</p>
+            
+            <p>At <strong>kmrwheels.in</strong>, we believe that renting a vehicle should be as simple and stress-free as possible. Founded on the principles of customer satisfaction, transparency, and excellence, we have grown into one of the most trusted vehicle rental services in the region. Our team is dedicated to providing you with a seamless rental experience, from the moment you book your vehicle to the time you return it.</p>
+
+            <p>We offer a wide range of vehicles to suit every purpose and budget. From compact cars for city driving to spacious SUVs for family trips, and even luxury vehicles for special occasions, our fleet is meticulously maintained to ensure safety, comfort, and reliability.</p>
+
+            <p>At <strong>kmrwheels.in</strong>, our mission is to provide a superior rental experience that exceeds your expectations. We are committed to continuous improvement and innovation, ensuring that we always offer the best in vehicle rental services. Your safety and satisfaction are our top priorities.</p>
+            
+            <a href={% url "contact" %} class="btn btn-primary">Get in Touch</a>
+        </div>
+    </section>
+</div>
+{% endblock user_content %}

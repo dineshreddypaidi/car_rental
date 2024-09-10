@@ -1,0 +1,150 @@
+{% extends "base/base.html" %}
+{% load static %}
+    {% block title %}
+        Kmr Wheels - Bikes
+    {% endblock title %}
+
+    {% block custom_style %} 
+        <link rel="stylesheet" href={% static "css/vechiles/filterbox.css" %}>
+    {% endblock custom_style %}
+
+    {% block user_logged %}
+        {% if user.is_authenticated %}
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" href="/user/rentals">My Rentals</a>
+                </li>
+                <br>
+                <li class="nav-item dropdown custom-dropdown-toggle">
+                    <a class="nav-link dropdown-toggle text-light" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        My Account
+                    </a>
+                    <ul class="dropdown-menu custom-dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="/user">Profile</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="/user/logout">Logout</a></li>
+                    </ul>
+                </li>
+            </ul>
+        {% else %}
+                <div class="profile-badge">
+                    <a href="/user/login" class="btn">Login</a>
+                </div>
+                <div class="profile-badge">
+                    <a href="/user/register" class="btn">Sign Up</a>
+                </div>
+        {% endif %}
+    {% endblock user_logged %}
+
+    {% block vechile_filter %}
+        <div class="container mt-4 mb-4 filter-box">
+            <form method="GET" action="{% url "bikes_view" %}" class="d-flex flex-nowrap overflow-auto filter-container">
+                <!-- Brand -->
+                <div class="flex-shrink-0 m-2 filter-box-options">
+                    <select class="form-select" id="brand" name="brand">
+                        <option value="">All Brands</option>
+                        {% for brand in brands %}
+                            <option value="{{ brand }}">{{ brand }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                 <!--fuel type-->
+                <div class="flex-shrink-0 m-2 filter-box-options">
+                    <select class="form-select" id="fuel" name="fuel">
+                        <option value="">fuel type</option>
+                        {% for fuel in fuels %}
+                            <option value="{{ fuel }}">{{ fuel }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <!--rental /hr-->
+                <div class="flex-shrink-0 m-2 filter-box-options">
+                    <select class="form-select" id="rent" name="rent">
+                        <option value="">rent /hr</option>
+                        {% for rent in rents %}
+                            <option value="{{ rent }}">below {{ rent }}/hr</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <!-- year -->
+                <div class="flex-shrink-0 m-2 filter-box-options">
+                    <select class="form-select" id="year" name="year">
+                        <option value="">Year</option>
+                        {% for year in years %}
+                            <option value="{{ year }}">{{ year }}</option>
+                        {% endfor %}
+                    </select>    
+                </div>
+                <!-- color -->
+                <div class="flex-shrink-0 m-2 filter-box-options">
+                    <select class="form-select" id="color" name="color">
+                        <option value="">color</option>
+                        {% for color in colors %}
+                            <option value="{{ color }}">{{ color }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <!--availability_status-->
+                <div class="flex-shrink-0 m-2 filter-box-options">
+                    <select class="form-select" id="status" name="status">
+                        <option value="">availability</option>
+                        {% for status in statuses %}
+                            <option value="{{ status }}">{{ status }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="flex-shrink-0 m-2 filter-box-options">
+                    <button type="submit" class="btn btn-success text-light">Filter</button>
+                </div>
+            </form>
+        </div>
+    {% endblock vechile_filter%}
+
+    {% block bikes %}
+    <section id="bikes" class="py-5 our_bikes border-bottom border-2 shadow rounded-2">
+        <div class="container">
+            {% comment %} <h2 class="text-center ">Bikes for rental</h2> {% endcomment %}
+            <div class="row">
+                <!-- Bike Item -->
+                {% for bike , image in bikes.items %}
+                    <div class="col-md-4 mb-4">
+                        <div class="card h-100 d-flex flex-column">
+                            <!-- Image Section -->
+                            <div class="fixed-img-size position-relative">
+                                <img src='{{ image.image }}' class="card-img-top img-thumbnail" alt="{{ car.brand }} {{ car.model }}">
+                                <span class="badge available-status position-absolute top-0 start-0 m-2 filter-box-options {{ bike.availability_status }}">{{ bike.availability_status }}</span>
+                            </div>
+                            <!-- Card Body -->
+                            <div class="card-body d-flex flex-column justify-content-between" style="background-color: rgba(79, 93, 181, 0.1);">
+                                <!-- Car Title -->
+                                <h5 class="card-title">{{ bike.brand }} {{ bike.model }}</h5>
+                                <p class="card-text">{{ bike.description }}</p>
+            
+                                <!-- Rental Rates -->
+                                <div class="row mt-auto">
+                                    <div class="col-6">
+                                        <p class="card-text mb-0"><strong>Rs. {{ bike.rental_rate_per_hour }}</strong> /hr</p>
+                                    </div>
+                                    <div class="col-6 text-end">
+                                        <p class="card-text mb-0"><strong>Rs. {{ bike.rental_rate_per_day }}</strong> /day</p>
+                                    </div>
+                                </div>
+            
+                                <!-- Action Buttons -->
+                                <div class="mt-3 d-flex justify-content-between">
+                                    {% if bike.availability_status == 'Available' %}
+                                        <a href="/book/bike/{{ bike.vechile_id }}" class="btn btn-primary btn-md">Book Now</a>
+                                    {% else %}
+                                        <button class="btn btn-primary btn-md" disabled>Not available</button>
+                                    {% endif %}
+                                    <a href="/vechiles/bike/{{ bike.vechile_id }}" class="btn btn-primary btn-md">View Details</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+    <br>
+    {% endblock bikes %}

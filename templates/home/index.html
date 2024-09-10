@@ -1,0 +1,207 @@
+{% extends "base/base.html" %}
+{% load static %}
+
+    {% block title %}
+        Kmr Wheels
+    {% endblock title %}
+
+    {% block promotion %}
+        <div class="promo-header">
+            <div class="container">
+                <div class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        {% for promotion in promotions %}
+                            <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                                <div class="promo-text">
+                                    <span>{{ promotion.promotion_text }}</span>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="social-icons">
+                    {% comment %} 
+                    <a href="#" class="text me-2"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="text me-2"><i class="fab fa-twitter"></i></a> 
+                    {% endcomment %}
+                    <a href="https://instagram.com/kmrwheels.in" target="_blank" class="text"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+    {% endblock promotion %}
+
+    {% block user_logged %}
+        {% if user.is_authenticated %}
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" href="/user/rentals/">My Rentals</a>
+                </li>
+                <br>
+                <li class="nav-item dropdown custom-dropdown-toggle">
+                    <a class="nav-link dropdown-toggle text-light" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        My Account
+                    </a>
+                    <ul class="dropdown-menu custom-dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="/user">Profile</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="/user/logout">Logout</a></li>
+                    </ul>
+                </li>
+            </ul>
+        {% else %}
+                <div class="profile-badge">
+                    <a href="/user/login" class="btn">Login</a>
+                </div>
+                <div class="profile-badge">
+                    <a href="/user/register" class="btn">Sign Up</a>
+                </div>
+        {% endif %}
+    {% endblock user_logged %}
+
+    {% comment %} {% block home_img_carousel %}
+        <div id="slideshow" class="carousel slide" data-bs-ride="carousel">
+            <!-- The slideshow/carousel -->
+            <div class="carousel-inner">
+                {% for car,image in cars.items %}
+                    <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                        <img src='{{image.image}}' alt="" class="d-block w-100">
+                    </div>
+                {% endfor %}
+            </div>
+
+            <!-- Left and right controls/icons -->
+            <button class="carousel-control-prev" type="button" data-bs-target="#slideshow" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon"></span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#slideshow" data-bs-slide="next">
+                <span class="carousel-control-next-icon"></span>
+            </button>
+        </div>
+        <br> 
+    {% endblock home_img_carousel %} {% endcomment %}
+
+    {% block cars %}
+    <section id="cars" class="py-5 our_cars border-bottom border-2 shadow rounded-2">
+        <div class="container">
+            <h2 class="text-center">Cars for Rental </h2>
+            <div class="row">
+                <!--cars-->
+                {% for car, image in cars.items %}
+                    <div class="col-md-4 mb-4">
+                        <div class="card h-100 d-flex flex-column">
+                            <!-- Image Section -->
+                            <div class="fixed-img-size position-relative">
+                                <img src='{{ image.image }}' class="card-img-top img-thumbnail" alt="{{ car.brand }} {{ car.model }}">
+                                <span class="badge available-status position-absolute top-0 start-0 m-2 {{ car.availability_status }}">{{ car.availability_status }}</span>
+                            </div>
+                            <!-- Card Body -->
+                            <div class="card-body d-flex flex-column justify-content-between" style="background-color: rgba(79, 93, 181, 0.1);">
+                                <!-- Car Title -->
+                                <h5 class="card-title">{{ car.brand }} {{ car.model }}</h5>
+                                <p class="card-text">{{ car.description }}</p>
+            
+                                <!-- Rental Rates -->
+                                <div class="row mt-auto">
+                                    <div class="col-6">
+                                        <p class="card-text mb-0"><strong>Rs. {{ car.rental_rate_per_hour }}</strong> /hr</p>
+                                    </div>
+                                    <div class="col-6 text-end">
+                                        <p class="card-text mb-0"><strong>Rs. {{ car.rental_rate_per_day }}</strong> /day</p>
+                                    </div>
+                                </div>
+            
+                                <!-- Action Buttons -->
+                                <div class="mt-3 d-flex justify-content-between">
+                                    {% if car.availability_status == 'Available' %}
+                                        <a href="/book/car/{{ car.vechile_id }}" class="btn btn-primary btn-md">Book Now</a>
+                                    {% else %}
+                                        <button class="btn btn-primary btn-md" disabled>Not available</button>
+                                    {% endif %}
+                                    <a href="/vechiles/car/{{ car.vechile_id }}" class="btn btn-primary btn-md">View Details</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}      
+            {% comment %} view-all banner {% endcomment %}
+                <div class="col-md-4">
+                    <a href="/vechiles/cars">
+                        <div class="card mb-4">
+                            <img src={% static "img/icon.png" %} class="card-img-top img-thumbnail" alt="Cars">
+                            <div class="card-body" style="background-color: rgba(79, 93, 181, 0.108);">
+                                    <h5 class="card-title">views all cars</h5>
+                                    <h2 class="btn btn-lg btn-danger">
+                                        view-all <i class="bi bi-arrow-return-right"></i>
+                                    </h2>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <br>
+    {% endblock cars %}
+
+    {% block bikes %}
+    <section id="bikes" class="py-5 our_bikes border-bottom border-2 shadow rounded-2">
+        <div class="container">
+            <h2 class="text-center ">Bikes for rental</h2>
+            <div class="row">
+                <!-- Bike Item -->
+                {% for bike , image in bikes.items %}
+                    <div class="col-md-4 mb-4">
+                        <div class="card h-100 d-flex flex-column">
+                            <!-- Image Section -->
+                            <div class="fixed-img-size position-relative">
+                                <img src='{{ image.image }}' class="card-img-top img-thumbnail" alt="{{ car.brand }} {{ car.model }}">
+                                <span class="badge available-status position-absolute top-0 start-0 m-2 {{ bike.availability_status }}">{{ bike.availability_status }}</span>
+                            </div>
+                            <!-- Card Body -->
+                            <div class="card-body d-flex flex-column justify-content-between" style="background-color: rgba(79, 93, 181, 0.1);">
+                                <!-- Car Title -->
+                                <h5 class="card-title">{{ bike.brand }} {{ bike.model }}</h5>
+                                <p class="card-text">{{ bike.description }}</p>
+            
+                                <!-- Rental Rates -->
+                                <div class="row mt-auto">
+                                    <div class="col-6">
+                                        <p class="card-text mb-0"><strong>Rs. {{ bike.rental_rate_per_hour }}</strong> /hr</p>
+                                    </div>
+                                    <div class="col-6 text-end">
+                                        <p class="card-text mb-0"><strong>Rs. {{ bike.rental_rate_per_day }}</strong> /day</p>
+                                    </div>
+                                </div>
+            
+                                <!-- Action Buttons -->
+                                <div class="mt-3 d-flex justify-content-between">
+                                    {% if bike.availability_status == 'Available' %}
+                                        <a href="/book/bike/{{ bike.vechile_id }}" class="btn btn-primary btn-md">Book Now</a>
+                                    {% else %}
+                                        <button class="btn btn-primary btn-md" disabled>Not available</button>
+                                    {% endif %}
+                                    <a href="/vechiles/bike/{{ bike.vechile_id }}" class="btn btn-primary btn-md">View Details</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% comment %} view-all banner {% endcomment %}
+                <div class="col-md-4">
+                    <a href="/vechiles/bikes">
+                        <div class="card mb-4">
+                            <img src={% static "img/icon.png" %} class="card-img-top img-thumbnail" alt="bikes">
+                            <div class="card-body" style="background-color: rgba(79, 93, 181, 0.108);">
+                                    <h5 class="card-title">views all bikes</h5>
+                                    <h2 class="btn btn-lg btn-danger">
+                                        view-all <i class="bi bi-arrow-return-right"></i>
+                                    </h2>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <br>
+    {% endblock bikes %}

@@ -1,0 +1,214 @@
+body {
+    font-family:'Times New Roman', Times, serif;
+}
+
+.promo-header {
+    background-color:gainsboro;
+    color: #252625;
+    padding: 10px 0;
+}
+.promo-header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+  
+.promo-header .social-icons a {
+    color: navy;
+    font-size: 1.2rem;
+    margin-left: 8px;
+    margin-right: 2px;
+}
+
+.btn-primary {
+    background-color: #007BFF;
+    border-color: #007BFF;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #004085;
+}
+
+.navbar {
+    margin-top: 0;
+    background-color: #fff;
+    border-radius: 0px 0px 30px 30px;
+    border-bottom: 1px solid #000;
+    border-top: 1.7px dashed #000080;
+    box-shadow: 0px 3px 3px #000080;
+    height: auto;
+}
+.navbar .container{
+    color:#fff;
+}
+.navbar-brand img {
+  height: 130px;
+  width: 160px;
+  border-radius:10px;
+}
+
+.navbar-nav .nav-link {
+    font-size: 18px;
+}
+
+.navbar-nav .nav-link.active {
+    font-weight: bold;
+}
+
+.nav-list-button {
+    border: none;
+    background-color: #fff;
+}
+.nav-list-container {
+    display:inline-block;
+    cursor: pointer;
+}
+  
+.bar1, .bar2, .bar3 {
+    width: 30px;
+    height: 4px;
+    background-color: #000;
+    margin: 4px;
+    transition: 0.25s;
+    border-radius: 3px;
+    padding: 2px;
+}
+  
+.change .bar1 {
+    transform: translate(0, 7px) rotate(-45deg);
+}
+  
+.change .bar2 {
+    opacity: 0;
+}
+  
+.change .bar3 {
+    transform: translate(0, -10px) rotate(45deg);
+}
+
+#navbarNav {
+    margin: 10px;
+    border-radius: 10px;
+    text-align: center;
+}
+#navbarNav .nav-item a {
+    color: #000;
+}
+#navbarNav .nav-item a:hover {
+    color: orange;
+    text-decoration: underline;
+}
+#navbarNav .nav-item .active,#navbarNav .nav-item .active:hover {
+    transition: 0.2s;
+    background-color: #000080;
+    box-shadow: 0px 2px 3px #000;
+    border-radius: 10px;
+    color: #fff;
+    text-decoration: none;
+}
+
+#navbarNav .profile-badge {
+    height: 40px;
+    width: 90px;
+    border-radius: 10px;
+    border: 1px solid #000;
+    background-color: #000080;
+    margin-left: 10px;
+}
+#navbarNav .profile-badge a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 18px;
+    text-align: center;
+}
+
+.custom-dropdown-toggle {
+    margin-left: 10px;
+    background-color: #000080;
+    height: 50px;
+    border-radius: 10px;
+    text-align: center;
+}
+.custom-dropdown-toggle a {
+    text-decoration: none;
+}
+.custom-dropdown-menu {
+    background-color: #000080;
+}
+
+.custom-dropdown-menu .dropdown-item {
+    color: #fff;
+}
+
+
+.carousel-control-prev-icon,.carousel-control-next-icon {
+    background-color:#000080;
+    border-radius: 50%;
+    border: 2px solid #000;
+}
+.carousel-item img {
+    max-height: 400px;
+    object-fit: contain;
+    width: 100%;
+    height: auto;
+}
+
+.fixed-img-size img{
+    width: 100%; 
+    height: 350px;
+    object-fit: contain; 
+    max-height: 400px;
+}
+.available-status {
+    font-size: 2rem;
+    font-family: monospace;
+    width: 30%;
+
+}
+.available-status.Available {
+    background-color: #04cf0b;
+    color: #fff;
+}
+.available-status.Maintenance {
+    background-color: #000;
+    color: #fff;
+}
+.available-status.Rented {
+    background-color: red;
+    color: #000;
+}
+.available-status.Reserved{
+    background-color: #000080;
+    color: #fffe;
+}
+.our_cars {
+    background-color:#f4f4f4;
+}
+.our_bikes {
+    background-color:#f5f5f5;
+}
+
+/* responsive */
+@media (min-width: 992px) {
+    .carousel-item img {
+        max-height: 360px;
+    }
+    .fixed-img-size img{
+        height: 350px;
+    }
+}
+
+@media (max-width: 576px) {
+    .carousel-item img {
+        max-height: 200px; 
+    }
+    .fixed-img-size img{
+        height: 300px;
+    }
+    #navbarNav .profile-badge {
+        width: 80%;
+        margin-left: 10%;
+        margin-top: 10px;
+    }
+}

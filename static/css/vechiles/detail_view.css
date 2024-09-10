@@ -1,0 +1,35 @@
+.vechile-image {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    border-radius: 15px;
+    background-color: #fff;
+    border: 1px solid rgba(0,0,0,0.2);
+}
+.fixed-img-size img {
+    padding:10px;
+}
+
+.rating {
+    color: #f39c12;
+}
+.review-card {
+    margin-bottom: 15px;
+}
+.view-container {
+    background-color:aliceblue;
+    margin: auto;
+    padding: 10px;
+    border-radius: 10px;
+}
+.vechile-name { 
+    text-align: center;
+    color: #000;
+}
+u {
+    color: #f39c12;
+}
+.rent-text {
+    color: #000080;
+    font-size: 1.5rem;
+}

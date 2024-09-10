@@ -1,0 +1,85 @@
+{% extends "base/base.html" %}
+{% load static %}
+
+{% block title %}
+    contact | Kmr Wheels
+{% endblock title %}
+
+{% block custom_style %}
+    <link rel="stylesheet" href={% static "css/user/login.css" %}>
+{% endblock custom_style %}
+
+{% block user_logged %}
+{% if user.is_authenticated %}
+    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+            <a class="nav-link" href="/user/rentals/">My Rentals</a>
+        </li>
+        <br>
+        <li class="nav-item dropdown custom-dropdown-toggle">
+            <a class="nav-link dropdown-toggle text-light" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                My Account
+            </a>
+            <ul class="dropdown-menu custom-dropdown-menu" aria-labelledby="navbarDropdown">
+                <li><a class="dropdown-item" href="/user">Profile</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="/user/logout">Logout</a></li>
+            </ul>
+        </li>
+    </ul>
+{% else %}
+    <div class="profile-badge">
+        <a href="/user/login" class="btn">Login</a>
+    </div>
+    <div class="profile-badge">
+        <a href="/user/register" class="btn">Sign Up</a>
+    </div>
+{% endif %}
+{% endblock user_logged %}
+
+{% block user_content %}
+<div class="container-center">
+    <div class="auth-container">
+            <div id="loginForm" class="form-container">
+                <h3 class="text-center" style="color:#000080">CONTACT US </h3><hr>
+                <form method="POST" action="{% url 'contact' %}" >
+                    {% csrf_token %}
+                    {% if messages %}
+                        <ul>
+                            {% for message in messages %}
+                                    <div class="alert alert-success alert-dismissible fade show w-100 mx-auto">
+                                        <button type="button" class="btn-close btn-sm" data-bs-dismiss="alert"></button>
+                                        <strong>{{ message }}</strong>
+                                    </div>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-floating mb-3 mt-3">
+                                <input type="text" class="form-control" id="email" placeholder="Enter email" name="phone" required>
+                                <label for="phone" class="input-field-user">Phone number</label>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-floating mb-3 mt-3 ">
+                                <input type="text" class="form-control" id="password" placeholder="Enter password" name="name" required>
+                                <label for="name" class="input-field-user">your name</label>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="mb-3 mt-3 ">
+                                <textarea class="form-control" placeholder="enter your query" name="message" rows="5">
+
+                                </textarea>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <input type="submit" class="text-light form-floating mb-3 mt-3 user-btn btn btn-primary" value="send message">
+                        </div>
+                    </div>
+                </form>
+            </div>
+    </div>
+</div>
+{% endblock user_content %}

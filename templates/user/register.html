@@ -1,0 +1,62 @@
+{% extends "base/base.html" %}
+{% load static %}
+    {% block title %}
+        Kmr Wheels - Register
+    {% endblock title %}
+       
+    {% block custom_style %}
+        <link rel="stylesheet" href={% static "css/user/login.css" %}>
+    {% endblock custom_style %}
+
+    {% block user_login_register %}
+        <div class="container-center">
+            <div class="auth-container">
+                <div class="nav-bar-user">
+                    <div id="loginBtn" class="nav-user-link">
+                        <a href="/user/login">Login</a>
+                    </div>
+                    <div id="signupBtn" class="nav-user-link active register">
+                        <a href="/user/register">Register</a>
+                    </div>
+                </div>
+                <div id="loginForm" class="form-container">
+                    <form method="POST" action="{% url 'register' %}">
+                        {% csrf_token %}
+                        {% if messages %}
+                            <ul>
+                                {% for message in messages %}
+                                    <div class="alert alert-danger alert-dismissible fade show my-1">
+                                        <button type="button" class="btn-close btn-sm" data-bs-dismiss="alert"></button>
+                                        <strong>{{ message }}</strong>
+                                    </div>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+                        <div class="form-floating mb-3 mt-3 ">
+                            <input type="text" class="form-control" placeholder="Enter username" name="username" required>
+                            <label for="username" class="input-field-user">username</label>
+                        </div>
+                        <div class="form-floating mb-3 mt-3 ">
+                            <input type="email" class="form-control" placeholder="Enter email" name="email" required>
+                            <label for="email" class="input-field-user">Email</label>
+                        </div>
+                        <div class="form-floating mb-3 mt-3 ">
+                            <input type="text" class="form-control"  placeholder="Enter number" name="phone_number" required>
+                            <label for="phone_number" class="input-field-user">Phone number</label>
+                        </div>
+                        <div class="form-floating mb-3 mt-3 ">
+                            <input type="password" class="form-control"  placeholder="Enter password" name="password" required>
+                            <label for="password" class="input-field-user">password</label>
+                        </div>
+                        <div class="form-floating mb-3 mt-3 ">
+                            <input type="text" class="form-control"  placeholder="Enter password 2" name="confirm_password" required>
+                            <label for="password" class="input-field-user">confirm_password</label>
+                        </div>
+                        <div class="form-floating mb-3 mt-3 user-btn">
+                            <input type="submit" class="btn text-light" value="Register">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    {% endblock user_login_register %}

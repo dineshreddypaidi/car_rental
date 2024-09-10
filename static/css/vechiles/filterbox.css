@@ -1,0 +1,23 @@
+.container form {
+    overflow-x: auto; 
+    white-space: nowrap;
+}
+
+.form-select, .form-control {
+    min-width: 150px;
+}
+.filter-container::-webkit-scrollbar {
+    display: none;
+}
+
+.filter-box {
+    background-color: aliceblue;
+    border-radius: 10px;
+}
+.form-select {
+    border: 1px solid #000;
+}
+.filter-box-options {
+    border: 1px solid #000;
+    border-radius: 0.4rem;
+}

@@ -1,0 +1,59 @@
+{% extends "base/base.html" %}
+{% load static %}
+    {% block title %}
+        @{{ user.username }} | kmrwheels profile
+    {% endblock title %}
+    {% block custom_style %}
+        <link rel="stylesheet" href={% static "css/user/profile.css" %}>
+    {% endblock custom_style %}
+    {% block user_logged %}
+        {% if user.is_authenticated %}
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" href="/user/rentals">My Rentals</a>
+                </li>
+                <br>
+                <li class="nav-item dropdown custom-dropdown-toggle">
+                    <a class="nav-link dropdown-toggle text-light" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        My Account
+                    </a>
+                    <ul class="dropdown-menu custom-dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="/user">Profile</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="/user/logout">Logout</a></li>
+                    </ul>
+                </li>
+            </ul>
+        {% else %}
+                <div class="profile-badge">
+                    <a href="/user/login" class="btn">Login</a>
+                </div>
+                <div class="profile-badge">
+                    <a href="/user/register" class="btn">Sign Up</a>
+                </div>
+        {% endif %}
+    {% endblock user_logged %}
+
+{% block user_content %}
+    <div class="card profile-card">
+        <div class="card-header bg-info text-white text-center p-4">
+            <img src="{% static "img/icon.png" %}" alt="Profile Picture" class="rounded-circle profile-img">
+            <h5 class="card-title mt-3 text-dark">
+                {{ user.username }}
+                {% if profile.is_verified %}
+                    <i class="bi bi-patch-check-fill"></i>
+                {% else %}
+                    <i class="bi bi-exclamation-triangle"></i>
+                {% endif %}
+            </h5>
+            <p class="card-text">{{profile.member_ship}} Member</p>
+        </div>
+        <div class="card-body text-center">
+            <p><i class="bi bi-envelope"></i> {{ user.email }}</p>
+            <p><i class="bi bi-phone"></i> {{ profile.phone_number }}</p>
+            <hr>
+            <a href="#" class="btn btn-outline-primary btn-sm">Edit Profile</a>
+            <a href="logout" class="btn btn-outline-danger btn-sm">Logout</a>
+        </div>
+    </div>
+{% endblock user_content %}
